@@ -1,0 +1,8 @@
+djangorestframework
+django
+tensorflow
+sklearn
+nltk
+num2words
+utils
+googleapiclient
