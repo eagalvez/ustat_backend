@@ -11,6 +11,7 @@ import sklearn.metrics
 import argparse
 import os
 import datetime
+MAX_WORDS = 25
 
 class Question_Manager():
     questions = []
@@ -79,12 +80,8 @@ class Question_Manager():
             print(str(question), file=file)
 
     def add_question(self, question):
-        print(question)
         normalized_question = normalize_questions(question)
-        print(normalize_questions)
-        
         question_vector = self.question_to_vector(normalized_question)
-        print(question_vector)
         if len(normalized_question) > 0 and question_vector is not None:
             self.questions.append(question)
             self.questions_normalized.append(normalized_question)

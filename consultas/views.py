@@ -1,10 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 from django.http.response import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
-from django.shortcuts import get_object_or_404
 import nltk
 import os
 from QM import Question_Manager
@@ -28,7 +25,6 @@ ruta = os.path.join(os.path.abspath("."),"Consultas\\Embeddings")
 ruta = os.path.join(ruta,"esTech_enTech_1.vec")
 # EMBEDDING_PATH = '.\Embeddings\esTech_enTech_1.vec'
 EMBEDDING_PATH = ruta
-MAX_WORDS = 25
 
 embedding = load_embedding(EMBEDDING_PATH)
 QM2 = Question_Manager(embedding)
@@ -66,7 +62,6 @@ def transformarListaPalabras_Json(ListaDeTuplas):
     return ListaFinal
 
 def getMessagesStreaming(LIVE_CHAT_ID):
-    print("DENTRO Message ")
     # Disable OAuthlib's HTTPS verification when running locally.
     # *DO NOT* leave this option enabled in production.
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -88,20 +83,12 @@ def getMessagesStreaming(LIVE_CHAT_ID):
     return response
 
 def anadir_pregunta(itemsL):
-    print("DENTRO ANADIR PREGUNTA")
     for item in itemsL:
         comentario = item["snippet"]["displayMessage"]
-        print(comentario)
-        logging.debug(comentario)
-        QM2.add_question(comentario)  
-        logging.debug(QM2.questions_normalized)
-        logging.debug(QM2.questions_vectors)
+        QM2.add_question(comentario)
 
 def director(LIVE_CHAT_ID):
-    print("Dentro del director")
     messageD = getMessagesStreaming(LIVE_CHAT_ID)
-    print("messageD")
-    print(messageD)
     itemsL = messageD["items"]
     anadir_pregunta(itemsL)
     kmeans = QM2.clustering(n_clusters=K_CLUSTERS)
@@ -114,7 +101,6 @@ def director(LIVE_CHAT_ID):
 
 @csrf_exempt
 def consultas_list(request):
-    
     if request.method == 'POST':
         objeto_data = JSONParser().parse(request)
         LIVE_CHAT_ID = objeto_data["liveChatId"]
