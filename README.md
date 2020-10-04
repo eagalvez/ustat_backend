@@ -1,4 +1,4 @@
-# USTAT BACKEND #
+# uStat Backend #
 
 ### What is uStats? ###
 uStats is a web tool that will allow you to monitor everything that happens with your YouTube live broadcast, from something as simple as general broadcast statistics, like number of likes, viewers,etc; till identify the topics and the frequently asked questions that arise in the chat.
@@ -32,9 +32,28 @@ python manage.py runserver
 
 ```
 {
-    "bubbles":...
-    "wc":...
-}
+    "bubbles":
+    [
+        {
+            name: Int // Number of the topic as Topic 1
+            data: [ {
+                        name: String // Main topic text, the one that is closest to the centriole
+                        value: Float //Size of the buble,
+                     }
+                  ...
+                  ] // descending order list
+        }
+    ]
+    ,
+
+    "wc":
+    [	 
+        {
+            text: String //Word
+            weight: Int //Frencuency of the word
+        }
+    ...
+    ]  
 ```
 
 * Please check the front end on this respository *https://github.com/enmanuel-mag/ustats-v2*
