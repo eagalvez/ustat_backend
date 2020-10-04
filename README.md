@@ -6,7 +6,7 @@ uStats is a web tool that will allow you to monitor everything that happens with
 Thanks to uStats the streamer can increase their efficiency and effectiveness in reading and answering questions by covering as many topics as possible, not wasting time on repeated questions.
 
 ## Run the sever ## 
-The backend of uStats project was created with django. In order to run the server please follow the next steps:
+The backend of uStats project was created with [django](https://www.djangoproject.com/). In order to run the server please follow the next steps:
 
 
 * Install the requirements for the project 
@@ -38,3 +38,5 @@ python manage.py runserver
 ```
 
 * Please check the front end on this respository *https://github.com/enmanuel-mag/ustats-v2*
+---
+Made with ❤ by BiTeam
